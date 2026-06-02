@@ -703,4 +703,14 @@ img {
     #searchBarContainer {
         padding: 0 var(--headerSpacing8);
     }
+
+    #rightSideContainer{
+        display: none; 
+    }
+}
+
+@media (max-width: 1000) {
+    #rightSideContainer div{
+        display: none; 
+    }
 }
