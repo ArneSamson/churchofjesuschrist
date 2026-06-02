@@ -644,3 +644,63 @@ img {
     object-fit: cover; /* Zorgt dat de video het hele scherm vult zonder randen */
     pointer-events: none; /* Voorkomt dat gebruikers rechtsklikken op de video */
 }
+
+/* --- Mobile Navbar Optimization --- */
+@media (max-width: 840px) {
+    /* Reveal the hamburger menu button */
+    #mobileNavButton {
+        display: flex !important; 
+    }
+
+    /* Hide the desktop menu and position it for mobile */
+    #mainMenus {
+        display: none !important; /* Hidden by default on mobile */
+        position: absolute;
+        top: var(--headerHeight);
+        left: 0;
+        width: 100%;
+        background-color: var(--darkModeTwo, var(--white));
+        flex-direction: column;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        z-index: 99;
+    }
+
+    /* Class added via JavaScript to toggle visibility */
+    #mainMenus.mobile-active {
+        display: flex !important;
+    }
+
+    /* Stack the unordered list vertically */
+    #menuUl {
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+    }
+
+    /* Full-width touch targets for menu items */
+    .menuWrapper {
+        width: 100%;
+        border-bottom: 1px solid var(--grey5);
+    }
+
+    .menuItemHeader {
+        width: 100%;
+        padding: 16px 24px;
+        font-size: var(--headerFontSize16);
+        justify-content: flex-start;
+    }
+
+    /* Hide the megamenu containers on mobile to save space, 
+       or convert them to vertical accordions */
+    .menusContainer {
+        position: static;
+        max-height: none;
+        box-shadow: none;
+        padding-left: 24px;
+    }
+    
+    /* Adjust search bar width for smaller screens */
+    #searchBarContainer {
+        padding: 0 var(--headerSpacing8);
+    }
+}
