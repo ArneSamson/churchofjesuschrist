@@ -212,11 +212,11 @@ svg:not(:root) {
     overflow: hidden;
 }
 
-a:-webkit-any-link {
+/* a:-webkit-any-link {
     color: -webkit-link;
     cursor: pointer;
     text-decoration: underline;
-}
+} */
 
 img {
     overflow-clip-margin: content-box;
@@ -253,6 +253,41 @@ img {
 }
 .navDrawer[open] .drawerSummary svg {
     transform: scaleY(-1);
+}
+
+.drawerContent {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: var(--headerSpacing16);
+    padding: var(--headerSpacing8) 0 var(--headerSpacing16);
+    width: 100%;
+}
+
+.footerLink, [role=link] {
+    color: var(--text120);
+    font-family: var(--sans);
+    font-weight: var(--fontWeightLight);
+    font-size: var(--headerFontSize12);
+    line-height: var(--lineHeight);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.footerText {
+    color: var(--darkModeWhite, var(--footerThemeText, var(--text120)));
+    font-family: var(--sans);
+    font-weight: var(--fontWeightLight);
+    font-size: var(--headerFontSize12);
+    line-height: var(--lineHeight);
+}
+
+#copyright {
+    color: var(--darkModeWhite, var(--footerThemeCopyright, var(--text120)));
 }
 
 #PFmainFooter {
@@ -304,6 +339,10 @@ img {
     justify-items: center;
 }
 
+#PFlinkBlock {
+    gap: var(--headerSpacing32);
+}
+
 #PFlinkBlock, #PFstandardLinks {
     display: flex;
     flex-direction: column;
@@ -320,6 +359,72 @@ img {
     text-align: center;
     grid-column: 1 / -1;
     margin-bottom: var(--headerSpacing16);
+}
+
+#PFlinkBlock, #PFstandardLinks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#PFstandardLinks {
+    justify-content: center;
+    row-gap: var(--headerSpacing8);
+    column-gap: var(--headerSpacing32);
+}
+
+#PFsocialLinks {
+    display: flex;
+    max-width: calc(32px * var(--numSocialLinks));
+    flex-wrap: wrap;
+    order: -1;
+    align-items: center;
+    justify-content: center;
+    gap: var(--headerSpacing8);
+}
+
+#PFsocialLinks .footerLink {
+    white-space: nowrap;
+}
+
+#PFsocialLinks .footerLink svg {
+    display: block;
+    height: 24px;
+    width: 24px;
+}
+
+#PFsocialLinks .footerLink .socialImage, #PFsocialLinks .footerLink svg {
+    display: block;
+    height: 24px;
+    width: 24px;
+    pointer-events: none;
+}
+
+#PFsocialLinks .footerLink .socialImage.youtube, #PFsocialLinks .footerLink svg.youtube {
+    height: 20px;
+    width: auto;
+}
+
+#PFfooterLegal {
+    align-items: center;
+    text-align: center;
+}
+
+#PFdisclosureLinks, #PFfooterLegal {
+    display: flex;
+    flex-direction: column;
+    gap: var(--headerSpacing8);
+}
+
+#teconsent {
+    display: inline;
+    color: var(--darkModeWhite, var(--footerThemeText, var(--text120)));
+}
+
+#PFdisclosureLinks, #PFfooterLegal {
+    display: flex;
+    flex-direction: column;
+    gap: var(--headerSpacing8);
 }
 
 @media (min-width: 840px) {
@@ -359,6 +464,28 @@ img {
     }
         #PFmainFooter:not(.PFforceMobile) .drawerSummary svg {
         display: none;
+    }
+    #PFmainFooter:not(.PFforceMobile) .drawerContent {
+        gap: var(--headerSpacing8);
+    }
+    #PFmainFooter:not(.PFforceMobile) #PFlinkBlock {
+        gap: 0;
+    }
+    #PFmainFooter:not(.PFforceMobile) #PFstandardLinks {
+        flex-direction: row;
+        border-bottom: 1px solid var(--grey15);
+        padding: var(--headerSpacing4) var(--headerSpacing8);
+    }
+    #PFmainFooter:not(.PFforceMobile) #PFstandardLinks .footerLink {
+        font-weight: var(--fontWeightSemiBold);
+    }
+    #PFmainFooter:not(.PFforceMobile) #PFfooterLegal {
+        margin-top: var(--headerSpacing64);
+    }
+    #PFmainFooter:not(.PFforceMobile) #PFsocialLinks {
+        margin-top: var(--headerSpacing16);
+        flex-wrap: nowrap;
+        order: 0;
     }
 }
 
