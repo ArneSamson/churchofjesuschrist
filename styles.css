@@ -502,3 +502,145 @@ img {
     }
 }
 
+/* ==========================================================================
+   MAIN CONTENT STYLES (Deel 1 & Deel 2)
+   ========================================================================== */
+
+#main-content {
+    font-family: var(--sans);
+    color: var(--text120);
+    /* Zorgt ervoor dat de pagina altijd op zijn minst de hoogte van het scherm heeft, 
+       zodat de footer onderaan blijft */
+    min-height: calc(100vh - var(--headerHeight)); 
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    background-color: var(--blue); /* Corporate dark blue uit de root */
+    color: var(--white);
+    text-align: center;
+    padding: var(--headerSpacing128) var(--headerSpacing16);
+}
+
+.hero-content h1 {
+    font-family: var(--serif);
+    font-size: var(--fontSize42);
+    font-weight: var(--fontWeightBold);
+    margin-bottom: var(--headerSpacing16);
+}
+
+.hero-content p {
+    font-size: var(--fontSize18);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: var(--lineHeightLoose);
+}
+
+/* --- Content Grid (Voor de subpagina's/propaganda) --- */
+.content-section {
+    max-width: var(--breakWidth1280);
+    margin: var(--headerSpacing64) auto;
+    padding: 0 var(--headerSpacing16);
+}
+
+.content-grid {
+    display: grid;
+    /* Automatisch schalen: 1 kolom op mobiel, meerdere op desktop */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--headerSpacing32);
+}
+
+.content-card {
+    background: var(--grey2);
+    padding: var(--headerSpacing32);
+    border-radius: 4px;
+    box-shadow: var(--boxShadowRaised);
+    border-top: 4px solid var(--blue25);
+}
+
+.content-card h2 {
+    font-size: var(--fontSize20);
+    color: var(--blue40);
+    margin-top: 0;
+    margin-bottom: var(--headerSpacing16);
+}
+
+.content-card p {
+    line-height: var(--lineHeightLoose);
+}
+
+/* --- The Gateway (Deel 2: Tekst & Input) --- */
+.gateway-section {
+    text-align: center;
+    margin: var(--headerSpacing128) auto var(--headerSpacing64);
+    padding: var(--headerSpacing32);
+    max-width: 650px;
+}
+
+.verse-text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: var(--fontSize16);
+    line-height: var(--lineHeightLoose);
+    color: var(--grey60);
+    margin-bottom: var(--headerSpacing32);
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#secretInput {
+    padding: 12px var(--headerSpacing16);
+    width: 100%;
+    max-width: 350px;
+    font-family: var(--monospace);
+    font-size: var(--fontSize16);
+    border: 1px solid var(--grey30);
+    border-radius: 2px;
+    background-color: var(--white);
+    color: var(--text120);
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+#secretInput:focus {
+    outline: 2px solid var(--blue25);
+    border-color: transparent;
+}
+
+#secretInput::placeholder {
+    color: var(--grey20);
+}
+
+.error-message {
+    display: none; /* Wordt aangestuurd via JavaScript */
+    color: var(--danger60);
+    font-family: var(--sans);
+    font-weight: var(--fontWeightBold);
+    font-size: var(--fontSize14);
+    margin-top: var(--headerSpacing16);
+}
+
+/* --- Deel 3: De Blackout Overlay & Video --- */
+#blackoutOverlay {
+    display: none; /* Standaard verborgen */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    z-index: 9999; /* Zorgt dat dit over de header en footer heen ligt */
+    justify-content: center;
+    align-items: center;
+}
+
+#spookyVideo {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover; /* Zorgt dat de video het hele scherm vult zonder randen */
+    pointer-events: none; /* Voorkomt dat gebruikers rechtsklikken op de video */
+}
