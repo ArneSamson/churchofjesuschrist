@@ -230,7 +230,7 @@
 
       <div id="blackoutOverlay">
           <video id="spookyVideo" playsinline>
-              <source src="placeholder.mp4" type="video/mp4"> </video>
+              <source src="public/placeholder.mp4" type="video/mp4"> </video>
       </div>
   </main>
 
@@ -312,7 +312,7 @@
           // Normaliseer: negeer spaties, case-insensitive, ; of : mag beide
           let normalizedInput = e.target.value.toLowerCase().replace(/\s+/g, '').replace(/;/g, ':');
           
-          if (normalizedInput === 'psalm69:36:') {
+          if (normalizedInput === 'psalm69:36') {
               errorMessage.style.display = 'none';
               triggerBlackout();
           } else if (normalizedInput.length > 10) {
