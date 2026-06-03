@@ -214,25 +214,34 @@
     </template>
 </platform-header>
 
+  <div id="customToolsMenu" class="custom-dropdown">
+      <ul>
+          <li><a href="brighamyoung.html">Brigham Young</a></li>
+          <li><a href="future.html">The Future</a></li>
+          <li><a href="guardiansoftruth.html">Guardians of Truth</a></li>
+          <li><a href="sacredstewardship.html">Sacred Stewardship</a></li>
+      </ul>
+  </div>
+
   <nav id="mobileMenus" aria-label="Primary navigation">
     <ul id="menuUl">
       <li class="menuWrapper">
-        <a class="menuItemHeader" id="my-home-mega" href="blog/brighamyoung.html" data-title="My Home" data-has-analytics="true">
+        <a class="menuItemHeader" id="my-home-mega" href="brighamyoung.html" data-title="My Home" data-has-analytics="true">
           Brigham Young
         </a>
       </li>
       <li class="menuWrapper">
-        <a class="menuItemHeader" id="libraries-span" href="blog/future.html" aria-controls="libraries" aria-expanded="false" type="button">
+        <a class="menuItemHeader" id="libraries-span" href="future.html" aria-controls="libraries" aria-expanded="false" type="button">
           The Future
         </a>
       </li>
       <li class="menuWrapper">
-        <a class="menuItemHeader" id="serve-span" href="blog/guardiansoftruth.html" aria-controls="serve" aria-expanded="false" type="button">
+        <a class="menuItemHeader" id="serve-span" href="guardiansoftruth.html" aria-controls="serve" aria-expanded="false" type="button">
           Guardians of Truth
         </a>
       </li> 
       <li class="menuWrapper">
-        <a class="menuItemHeader" id="news-span" href="blog/sacredstewardship.html" aria-controls="news" aria-expanded="false" type="button">
+        <a class="menuItemHeader" id="news-span" href="sacredstewardship.html" aria-controls="news" aria-expanded="false" type="button">
           Sacred Stewardship
         </a>
       </li>
@@ -373,5 +382,70 @@
             }
         });
     </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Laag 1 binnendringen
+        const platformHeader = document.querySelector('platform-header');
+        
+        if (platformHeader && platformHeader.shadowRoot) {
+            const headerShadow = platformHeader.shadowRoot;
+            
+            // Variabelen voor mobiel menu (zitten in laag 1)
+            const mobileBtn = headerShadow.querySelector('#mobileNavButton');
+            const mainMenus = headerShadow.querySelector('#mainMenus');
+
+            if (mobileBtn && mainMenus) {
+                mobileBtn.addEventListener('click', () => {
+                    mainMenus.classList.toggle('mobile-active');
+                    const isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
+                    mobileBtn.setAttribute('aria-expanded', !isExpanded);
+                });
+            }
+
+            // Laag 2 binnendringen voor de profiel navigatie
+            const profileNav = headerShadow.querySelector('global-profile-nav');
+            
+            if (profileNav && profileNav.shadowRoot) {
+                const profileShadow = profileNav.shadowRoot;
+                
+                // Variabelen voor nieuwe Tools Dropdown (zitten in laag 2)
+                const toolsBtn = profileShadow.querySelector('#tools'); 
+                const customToolsMenu = document.getElementById('customToolsMenu');
+
+                if (toolsBtn && customToolsMenu) {
+                    toolsBtn.addEventListener('click', (e) => {
+                        console.log("Tools button clicked!");
+                        e.stopPropagation(); 
+                        
+                        // Bereken exact waar de knop staat op het scherm
+                        const rect = toolsBtn.getBoundingClientRect();
+                        
+                        // Plaats het menu onder de knop
+                        customToolsMenu.style.top = `${rect.bottom + window.scrollY + 8}px`;
+                        customToolsMenu.style.right = `${window.innerWidth - rect.right}px`;
+                        
+                        // Open of sluit het menu
+                        customToolsMenu.classList.toggle('is-active');
+                    });
+
+                    // Sluit het menu als er in het gewone document wordt geklikt
+                    document.addEventListener('click', (e) => {
+                        if (customToolsMenu.classList.contains('is-active') && !customToolsMenu.contains(e.target)) {
+                            customToolsMenu.classList.remove('is-active');
+                        }
+                    });
+
+                    // Sluit het menu als er ergens ANDERS in de Shadow DOM(s) wordt geklikt
+                    platformHeader.addEventListener('click', (e) => {
+                        const path = e.composedPath(); 
+                        if (!path.includes(toolsBtn) && customToolsMenu.classList.contains('is-active')) {
+                            customToolsMenu.classList.remove('is-active');
+                        }
+                    });
+                }
+            }
+        }
+    });
+  </script>
 </body>
 </html>
