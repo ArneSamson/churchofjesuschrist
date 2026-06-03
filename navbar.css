@@ -652,19 +652,19 @@ search-bar.hidden+#menusContainer {
         flex-direction: column;
     }
     #headerInsides {
-        height: 100px;
+        height: 150px;
         justify-content: space-between;
     }
     #mainLogoLink{
-        height: 100px;
-        gap: 10px;
+        height: 150px;
+        gap: 70px;
     }
     #symbolContainer {
         height: auto;
     }
     :host([rtl=false]) #lightraysContainer {
         /* width: 100px; */
-        height: 100px;
+        height: 120px;
         display: block;
     }   
     #lightraysContainer {
@@ -672,11 +672,12 @@ search-bar.hidden+#menusContainer {
         /* padding-left: 9px; */
     }
     :host([rtl=false]) #lightraysContainer svg {
-        height: calc(var(--headerHeight) + 6.5px);
+        height: 113px;
         margin-left: -0.5px;
+        width: auto;
     }
     #wordmark{
-        padding-top: 25px;
+        padding-top: 75px;
     }
 
 }
@@ -696,7 +697,7 @@ search-bar.hidden+#menusContainer {
 }
 
 #mainMenus {
-	height: var(--headerHeight);
+	/* height: var(--headerHeight); */
 	z-index: 101;
 	background: var(--darkModeTwo, var(--white));
 	align-items: center;
