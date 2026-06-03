@@ -309,6 +309,10 @@
 
           // Normaliseer: negeer spaties, case-insensitive, ; of : mag beide
           let normalizedInput = e.target.value.toLowerCase().replace(/\s+/g, '').replace(/;/g, ':');
+          // also accept psalm6936 and psalm69 36 without the colon, as long as the rest of the input is correct
+          if (normalizedInput === 'psalm6936' || normalizedInput === 'psalm69 36') {
+              normalizedInput = 'psalm69:36';
+          }
           
           if (normalizedInput === 'psalm69:36') {
               errorMessage.style.display = 'none';
