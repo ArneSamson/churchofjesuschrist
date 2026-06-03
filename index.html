@@ -252,7 +252,7 @@
       </section>
 
       <div id="blackoutOverlay">
-          <video id="spookyVideo" playsinline>
+          <video id="spookyVideo" playsinline preload="auto">
               <source src="https://placeholdervideo.dev/1920x1080" type="video/mp4"> </video>
       </div>
   </main>
@@ -393,6 +393,20 @@
           overlay.style.display = 'flex';
           
           document.body.classList.add('blackout-active');
+
+          // MOBIELE FIX: 'Unlock' de video tijdens de directe toetsaanslag
+          spookyVideo.muted = true; // Moet even gedempt zijn om te mogen starten
+          let playPromise = spookyVideo.play();
+
+          if (playPromise !== undefined) {
+              playPromise.then(() => {
+                  spookyVideo.pause(); // Pauzeer direct weer
+                  spookyVideo.currentTime = 0; // Spoel terug
+                  spookyVideo.muted = false; // Zet geluid weer aan voor straks
+              }).catch(error => {
+                  console.log("Unlock failed:", error);
+              });
+          }
 
           // Wacht 5 seconden in pure stilte
           setTimeout(() => {
