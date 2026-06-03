@@ -223,9 +223,9 @@
           </p>
           
           <div class="input-container">
-              <input type="text" id="secretInput" placeholder="Seek..." autocomplete="off">
-              <div id="errorMessage" class="error-message"></div>
-          </div>
+            <textarea id="secretInput" rows="1" placeholder="Seek..." autocomplete="off"></textarea>
+            <div id="errorMessage" class="error-message"></div>
+        </div>
       </section>
 
       <div id="blackoutOverlay">
@@ -353,6 +353,9 @@
               if (currentIndex < targetPhrase.length) {
                   inputField.value += targetPhrase[currentIndex];
                   currentIndex++;
+
+                  inputField.style.height = 'auto';
+                  inputField.style.height = inputField.scrollHeight + 'px';
               }
           }
       });

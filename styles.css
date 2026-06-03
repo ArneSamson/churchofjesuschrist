@@ -568,11 +568,18 @@ img {
     max-width: 350px;
     font-family: var(--monospace);
     font-size: 1rem;
-    border: 1px solid var(--grey20); /* Strak en vierkant */
+    border: 1px solid var(--grey20);
     border-radius: 2px;
     background-color: var(--white);
     color: var(--text120);
     text-align: center;
+    
+    /* Nieuwe regels voor het meegroeien: */
+    resize: none;
+    overflow: hidden;
+    line-height: 1.5;
+    min-height: 48px; /* Hoogte van exact 1 regel met padding */
+    transition: outline 0.2s ease, border-color 0.2s ease;
 }
 
 #secretInput:focus {
