@@ -362,6 +362,8 @@
           inputField.blur(); // Haal de muiscursor uit het veld
           overlay.style.display = 'flex';
           
+          document.body.classList.add('blackout-active');
+
           // Wacht 5 seconden in pure stilte
           setTimeout(() => {
               spookyVideo.play().catch(err => {
@@ -385,6 +387,9 @@
         spookyVideo.addEventListener('ended', () => {
             overlay.style.display = 'none';
             isPostVideoState = true;
+
+            document.body.classList.remove('blackout-active');
+            
             inputField.value = ''; // Maak veld terug leeg
             inputField.placeholder = "You seeked..."; 
             inputField.focus(); // Forceer focus terug op het veld

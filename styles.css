@@ -601,6 +601,8 @@ img {
     z-index: 9999; 
     justify-content: center;
     align-items: center;
+    opacity: 1; 
+    transition: opacity 1.5s ease-in-out;
 }
 
 #spookyVideo {
@@ -783,4 +785,9 @@ img {
     #rightSideContainer div{
         display: none; 
     }
+}
+
+body.blackout-active {
+    overflow: hidden !important; /* Blokkeert scrollen en verbergt de scrollbars */
+    cursor: none !important;     /* Maakt de muisaanwijzer onzichtbaar */
 }
