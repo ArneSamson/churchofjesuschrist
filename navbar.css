@@ -682,6 +682,23 @@ search-bar.hidden+#menusContainer {
 
 }
 
+/* ==========================================================================
+   SPECIFIEKE FIX VOOR SCHERMEN KLEINER DAN 500PX (Menu onder de balk)
+   ========================================================================== */
+@media (max-width: 600px) {
+
+    #mainMenus {
+        display: none !important;
+    }
+	:host([rtl=false]) #wordmark{
+		padding-left: 0px;
+	}
+	:host([rtl=false]) #mainLogo {
+		width: 120px
+	}
+
+}
+
 :host([data-showheader=true]) #menusSearchContainer {
 	width: 100%;
 	visibility: visible !important
