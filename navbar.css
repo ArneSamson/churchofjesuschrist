@@ -675,6 +675,9 @@ search-bar.hidden+#menusContainer {
         height: calc(var(--headerHeight) + 6.5px);
         margin-left: -0.5px;
     }
+    #wordmark{
+        padding-top: 25px;
+    }
 
 }
 
