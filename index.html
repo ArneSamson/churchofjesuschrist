@@ -214,10 +214,24 @@
     </template>
 </platform-header>
   
-  <main>
-    <h1>
-      hello world
-    </h1>
+  <main id="main-content">
+      <section id="the-gateway" class="gateway-section">
+          <p class="verse-text">
+              Matthew 7:7-8
+              <br><br>
+              “Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you. But you must ask; you MUST seek for it to reveal itself; and you MUST break down the door to catch a glimpse of the dark.”
+          </p>
+          
+          <div class="input-container">
+              <input type="text" id="secretInput" placeholder="Seek..." autocomplete="off">
+              <div id="errorMessage" class="error-message"></div>
+          </div>
+      </section>
+
+      <div id="blackoutOverlay">
+          <video id="spookyVideo" playsinline>
+              <source src="placeholder.mp4" type="video/mp4"> </video>
+      </div>
   </main>
 
   <footer id="PFmainFooter">
@@ -279,28 +293,127 @@
           </div>
       </div>
   </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Because the header uses a Shadow DOM, we must pierce it to select the elements
-            const platformHeader = document.querySelector('platform-header');
-            
-            if (platformHeader && platformHeader.shadowRoot) {
-                const shadow = platformHeader.shadowRoot;
-                const mobileBtn = shadow.querySelector('#mobileNavButton');
-                const mainMenus = shadow.querySelector('#mainMenus');
 
-                if (mobileBtn && mainMenus) {
-                    mobileBtn.addEventListener('click', () => {
-                        // Toggle the CSS class that overrides 'display: none'
-                        mainMenus.classList.toggle('mobile-active');
-                        
-                        // Update ARIA attributes for accessibility
-                        const isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
-                        mobileBtn.setAttribute('aria-expanded', !isExpanded);
-                    });
-                }
-            }
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const inputField = document.getElementById('secretInput');
+      const errorMessage = document.getElementById('errorMessage');
+      const overlay = document.getElementById('blackoutOverlay');
+      const spookyVideo = document.getElementById('spookyVideo');
+
+      let isPostVideoState = false;
+      let currentIndex = 0;
+      const targetPhrase = "As you are now aware of the dark you finally see this space for what it is. Not a void or an absence of light, but an entity; not powerful, nor angry, nor evil; just fulfilling its purpose of absorbing the light by any means necessary.";
+
+      // Luister naar normale input (Fase 1)
+      inputField.addEventListener('input', (e) => {
+          if (isPostVideoState) return; // Doe niets tijdens de overgenomen status
+
+          // Normaliseer: negeer spaties, case-insensitive, ; of : mag beide
+          let normalizedInput = e.target.value.toLowerCase().replace(/\s+/g, '').replace(/;/g, ':');
+          
+          if (normalizedInput === 'psalm69:36:') {
+              errorMessage.style.display = 'none';
+              triggerBlackout();
+          } else if (normalizedInput.length > 10) {
+              // Foutmelding na x-aantal foute karakters
+              errorMessage.textContent = randomErrorMessage();
+              errorMessage.style.display = 'block';
+          } else {
+              errorMessage.style.display = 'none';
+          }
+      });
+
+      // Event listener voor toetsaanslagen (Enter in Fase 1, Gekaapt typen in Fase 2)
+      inputField.addEventListener('keydown', (e) => {
+          
+          // FASE 1: Voordat de video is afgespeeld
+          if (!isPostVideoState) {
+              if (e.key === 'Enter') {
+                  e.preventDefault(); // Voorkom dat een eventueel onzichtbaar formulier verzendt
+                  
+                  let normalizedInput = inputField.value.toLowerCase().replace(/\s+/g, '').replace(/;/g, ':');
+                  if (normalizedInput !== 'psalm69:36:') {
+                      // Toon foutmelding bij een foute Enter-aanslag
+                      errorMessage.textContent = randomErrorMessage();
+                      errorMessage.style.display = 'block';
+                  }
+              }
+              return; // Stop hier voor Fase 1
+          }
+
+          // FASE 2: Gekaapte 'typing' functionaliteit
+          // Blokkeer backspace functionaliteit
+          if (e.key === 'Backspace') {
+              e.preventDefault(); 
+          } 
+          // Vang alle normale karakter-toetsaanslagen op
+          else if (e.key.length === 1) { 
+              e.preventDefault();
+              if (currentIndex < targetPhrase.length) {
+                  inputField.value += targetPhrase[currentIndex];
+                  currentIndex++;
+              }
+          }
+      });
+
+      // De Blackout Sequentie
+      function triggerBlackout() {
+          inputField.blur(); // Haal de muiscursor uit het veld
+          overlay.style.display = 'flex';
+          
+          // Wacht 5 seconden in pure stilte
+          setTimeout(() => {
+              spookyVideo.play().catch(err => {
+                  console.error("Browser autoplay preventie heeft dit geblokkeerd. Omdat de gebruiker in de input heeft getypt, zou dit normaal niet mogen gebeuren.", err);
+              });
+          }, 5000);
+      }
+
+      function randomErrorMessage() {
+          const messages = [
+              "Seek for the irregular.",
+              "The darkness is patient.",
+              "Not quite right. Seek deeper.",
+              "The answer is close, but not there yet.",
+              "Keep seeking..."
+          ];
+          return messages[Math.floor(Math.random() * messages.length)];
+      }
+
+        // Wanneer de video gedaan is, reset de site naar de "Dark" state
+        spookyVideo.addEventListener('ended', () => {
+            overlay.style.display = 'none';
+            isPostVideoState = true;
+            inputField.value = ''; // Maak veld terug leeg
+            inputField.placeholder = "You seeked..."; 
+            inputField.focus(); // Forceer focus terug op het veld
         });
+      });
     </script>
+
+  <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          // Because the header uses a Shadow DOM, we must pierce it to select the elements
+          const platformHeader = document.querySelector('platform-header');
+          
+          if (platformHeader && platformHeader.shadowRoot) {
+              const shadow = platformHeader.shadowRoot;
+              const mobileBtn = shadow.querySelector('#mobileNavButton');
+              const mainMenus = shadow.querySelector('#mainMenus');
+
+              if (mobileBtn && mainMenus) {
+                  mobileBtn.addEventListener('click', () => {
+                      // Toggle the CSS class that overrides 'display: none'
+                      mainMenus.classList.toggle('mobile-active');
+                      
+                      // Update ARIA attributes for accessibility
+                      const isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
+                      mobileBtn.setAttribute('aria-expanded', !isExpanded);
+                  });
+              }
+          }
+      });
+  </script>
 </body>
 </html>
