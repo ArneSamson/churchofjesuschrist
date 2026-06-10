@@ -511,6 +511,36 @@ img {
     color: var(--grey60);
 }
 
+/* ==========================================================================
+   ARTIKEL AFBEELDINGEN (Redactionele look)
+   ========================================================================== */
+.article-image-container {
+    margin: 0 0 32px 0; /* Witruimte onder de foto en het bijschrift */
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    margin: 0 0 32px 0;
+    width: 100%;
+}
+
+.article-image-container img {
+    max-height: 400px; /* Beperkt de hoogte, maar laat de breedte flexibel */
+    width: auto;
+    height: auto;
+    display: block;
+    border: 1px solid var(--grey15); /* Dunne grijze rand, typisch voor nieuwsartikelen */
+    border-radius: 2px; /* Heel subtiel afgerond, mag ook 0 zijn voor superstrak */
+}
+
+.article-image-container figcaption {
+    font-family: var(--sans);
+    font-size: 0.875rem; /* 14px */
+    color: var(--grey40);
+    margin-top: 8px;
+    text-align: right; /* Tekst rechts uitgelijnd, geeft een 'bronvermelding' gevoel */
+    font-style: italic;
+}
+
 /* --- Artikel Container (Specifieke blog layout) --- */
 .article-container {
     max-width: 720px; /* Vrij smalle kolom (typisch voor lange, officiële teksten) */
@@ -544,7 +574,7 @@ img {
 .hero-section {
     position: relative;
     width: 100%;
-    max-height: 600px;
+    max-height: 6%;
     overflow: hidden;
     display: flex;
     justify-content: center;
